@@ -255,15 +255,7 @@
     <finalName>mmall</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <plugin>
-          <groupId>org.mybatis.generator</groupId>
-          <artifactId>mybatis-generator-maven-plugin</artifactId>
-          <version>1.3.2</version>
-          <configuration>
-            <verbose>true</verbose>
-            <overwrite>true</overwrite>
-          </configuration>
-        </plugin>
+
 
 
         <plugin>
@@ -306,5 +298,17 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <!--需要放在和pluginManagement同级别，否则maven插件是找不到的-->
+    <plugins>
+      <plugin>
+        <groupId>org.mybatis.generator</groupId>
+        <artifactId>mybatis-generator-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <configuration>
+          <verbose>true</verbose>
+          <overwrite>true</overwrite>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
