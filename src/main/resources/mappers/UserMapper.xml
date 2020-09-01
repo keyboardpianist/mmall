@@ -151,4 +151,26 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="checkUsername" resultType="int" parameterType="string">
+    select count(1) from mmall_user
+    where username = #{username}
+    <!--这种方式会检查参数类型，可以一定程度上防止sql注入-->
+  </select>
+
+  <select id="selectLogin" resultType="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from mmall_user
+    where username = #{username} and password = #{password}
+    <!--select * 不建议使用，一旦表结构发生修改，就容易翻车-->
+  </select>
+
+  <select id="checkEmail" resultType="int" parameterType="string">
+    select count(1) from mmall_user
+    where username = #{email}
+    <!--这种方式会检查参数类型，可以一定程度上防止sql注入-->
+  </select>
+
 </mapper>
