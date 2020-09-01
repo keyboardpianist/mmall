@@ -12,9 +12,9 @@
 
     <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/mmall.log</File>-->
-        <File>F:/BUPT/javalearning/【分享】004 Java电商项目从零到企业级实战/mmall_learning/new/log/mmall.log</File>
+        <File>F:/BUPT/javalearning/mmall/logs/mmall.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>F:/BUPT/javalearning/【分享】004 Java电商项目从零到企业级实战/mmall_learning/new/log/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>F:/BUPT/javalearning/mmall/logs/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -26,9 +26,9 @@
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/error.log</File>-->
-        <File>F:/BUPT/javalearning/【分享】004 Java电商项目从零到企业级实战/mmall_learning/new/log/error.log</File>
+        <File>F:/BUPT/javalearning/mmall/logs/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>F:/BUPT/javalearning/【分享】004 Java电商项目从零到企业级实战/mmall_learning/new/log/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>F:/BUPT/javalearning/mmall/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <!--<fileNamePattern>d:/mmalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
