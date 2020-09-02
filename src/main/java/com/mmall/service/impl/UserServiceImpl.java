@@ -2,6 +2,7 @@ package com.mmall.service.impl;
 
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
+import com.mmall.common.TokenCache;
 import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -9,6 +10,8 @@ import com.mmall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {
@@ -86,4 +89,35 @@ public class UserServiceImpl implements IUserService {
 
         return ServerResponse.createBySuccessMessage("校验成功");
     }//实时反馈是否合适
+
+    public ServerResponse<String> selectQuestion(String username)
+    {
+        ServerResponse vaildResponse = this.checkValid(username, Const.USERNAME);
+        if (vaildResponse.isSuccess())
+        {
+            //用户不存在
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
+        String question = userMapper.selectQuestionByUsername(username);
+        if (StringUtils.isNotBlank(question))
+        {
+            return ServerResponse.createBySuccess(question);
+        }
+
+        return ServerResponse.createByErrorMessage("找回密码的问题为空");
+    }
+
+    public ServerResponse<String> checkAnswer(String username, String question, String answer)
+    {
+        int resultCount = userMapper.checkAnswer(username, question, answer);
+        if (resultCount > 0)
+        {
+            String forgetToken = UUID.randomUUID().toString();
+            TokenCache.setKey("token_" + username, forgetToken);
+            return  ServerResponse.createBySuccess(forgetToken);
+        }//需要一个专用的token保存到服务器缓存中，来说明确实是当前用户在修改自己的密码
+        //为什么不直接用session?因为这是点击了忘记密码！！！我佛了。。
+        //这里其实可以在这个基础上改成发送一封邮件到用户指定的邮箱。。当然token还是要保存一下的，毕竟要记住当前是哪个用户，且必须是知晓答案的人
+        return ServerResponse.createByErrorMessage("问题的答案错误");
+    }
 }

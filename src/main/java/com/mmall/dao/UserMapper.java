@@ -22,4 +22,8 @@ public interface UserMapper {
 
     User selectLogin(@Param("username") String username, @Param("password") String password);
     //指定xml中的参数
+
+    String selectQuestionByUsername(String username);
+
+    int checkAnswer(@Param("username")String username, @Param("question")String question, @Param("answer")String answer);
 }
