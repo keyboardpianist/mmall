@@ -14,7 +14,7 @@ import sun.security.provider.MD5;
 
 import java.util.UUID;
 
-@Service("IUserService")
+@Service("iUserService")
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
@@ -192,5 +192,16 @@ public class UserServiceImpl implements IUserService {
 
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
+    }
+
+    //backend
+
+    public ServerResponse checkAdminRole(User user)
+    {
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN)
+        {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }
