@@ -76,7 +76,7 @@ public class CategoryServiceImpl implements ICategoryService {
         return ServerResponse.createBySuccess(categoryList);
     }
 
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId)
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId)
     {
         if (categoryId != null)
         {
