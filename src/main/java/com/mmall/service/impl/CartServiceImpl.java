@@ -172,8 +172,4 @@ public class CartServiceImpl implements ICartService {
         return ServerResponse.createBySuccess(cartMapper.selectCartProductCount(userId));
     }
 
-    public static void main(String[] args) {
-        List<String> productList = Splitter.on(",").splitToList("26");
-        System.out.println(productList);
-    }
 }
